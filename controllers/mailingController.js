@@ -1,6 +1,5 @@
 const { transporter } = require("../config/nodemailer");
 
-
 const enviarEmailNuevo = (subject, content) => {
   /* Enviar un mail a través del formulario */
   let mailOptions = {
@@ -9,7 +8,7 @@ const enviarEmailNuevo = (subject, content) => {
     subject,
     html: content,
   };
-console.log(mailOptions);
+
   transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
       console.log("Error, el mail no se ha enviado: " + err);
@@ -18,8 +17,8 @@ console.log(mailOptions);
         error: err.message,
       };
     } else {
-      console.log("Email enviado correctamente", data);
-      return { msg: "Email enviado correctamente", data, error: err.message };
+      console.log("Email enviado correctamente: ", data);
+      return { msg: "Email enviado correctamente", error: err.message };
     }
   });
 };
