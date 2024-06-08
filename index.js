@@ -1,6 +1,6 @@
 const { enviarEmailNuevo } = require("./controllers/mailingController");
 const dotenv = require("dotenv").config();
-const cors = require("cors")
+const cors = require("cors");
 
 const express = require("express");
 const app = express();
@@ -28,10 +28,10 @@ app.post("/sendEmail", (req, res) => {
       `Formulario Contacto: Remitente ${nombre} - Correo: ${email}`,
       mensaje
     );
-    res.status(200).json(respuestaEmail);
+    res.status(200).json({ msg: "Email enviado correctamente" });
   } catch (error) {
-    const err = new Error("Error al Enviar Correo")
-    res.status(500).json({msg: err.message});
+    const err = new Error("Error al Enviar Correo");
+    res.status(500).json({ msg: err.message });
   }
 });
 

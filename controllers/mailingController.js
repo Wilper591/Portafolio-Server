@@ -11,13 +11,13 @@ const enviarEmailNuevo = (subject, content) => {
 
   transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
-      console.log("Error, el mail no se ha enviado: " + err);
+/*       console.log("Error, el mail no se ha enviado: " + err); */
       return {
-        msg: "Error, el mail no se ha enviado: " + err,
+        msg: "Error, el mail no se ha enviado: ",
         error: err.message,
       };
     } else {
-      console.log("Email enviado correctamente: ", data);
+/*       console.log("Email enviado correctamente: ", data); */
       return { msg: "Email enviado correctamente", error: err.message };
     }
   });
