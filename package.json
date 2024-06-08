@@ -1,0 +1,19 @@
+{
+  "name": "nodemailer-server",
+  "version": "1.0.0",
+  "description": "Servidor configurado para el envio de email al correo personal",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jorge Cerda",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13"
+  }
+}
