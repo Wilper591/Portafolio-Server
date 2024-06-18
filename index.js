@@ -1,12 +1,10 @@
-const { enviarEmailNuevo } = require("./controllers/mailingController");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const rutasForm = require("./routes/form.routes.js");
 
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
 const dominiosPermitidos = [process.env.FRONTEND_URL];
 const corsOptions = {
@@ -20,20 +18,10 @@ const corsOptions = {
   },
 };
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors(corsOptions));
-app.post("/sendEmail", (req, res) => {
-  try {
-    const { nombre, email, mensaje } = req.body;
-    const respuestaEmail = enviarEmailNuevo(
-      `Formulario Contacto: Remitente ${nombre} - Correo: ${email}`,
-      mensaje
-    );
-    res.status(200).json({ msg: "Email enviado correctamente" });
-  } catch (error) {
-    const err = new Error("Error al Enviar Correo");
-    res.status(500).json({ msg: err.message });
-  }
-});
+app.use("/api", rutasForm);
 
 app.listen(PORT, () => {
   console.log(
