@@ -2,7 +2,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const db = require("./config/db.js");
 const rutasForm = require("./routes/form.routes.js");
+
+//Conectar a la base de datos
+db.authenticate()
+  .then(() => console.log("Base de datos conectada"))
+  .catch((error) => console.log(error));
+
 const PORT = process.env.PORT || 3000;
 
 const dominiosPermitidos = [process.env.FRONTEND_URL];
@@ -17,9 +24,9 @@ const corsOptions = {
   },
 };
 
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors(corsOptions));
 app.use("/api", rutasForm);
 
 app.listen(PORT, () => {

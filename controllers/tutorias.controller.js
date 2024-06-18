@@ -1,49 +1,27 @@
-const { db } = require("../config/db.js");
+const Review = require("../models/Review.js");
 
-const createReview = async (data) => {
-  return new Promise((resolve, reject) => {
-    const query = "INSERT INTO reviews (name, message) VALUES (?, ?);";
-    db.execute(query, [data.nombre, data.mensaje], (error, results) => {
-      if (error) {
-        db.end((endError) => {
-          if (endError) {
-            return reject(endError);
-          }
-          return reject(error);
-        });
-      } else {
-        db.end((endError) => {
-          if (endError) {
-            return reject(endError);
-          }
-          resolve(results);
-        });
-      }
-    });
-  });
+const createReview = async (req, res) => {
+  const { nombre, mensaje } = req.body;
+  try {
+    await Review.create({ name: nombre, message: mensaje });
+    res.status(200).json({ msg: "Reseña Creada Correctamente" });
+  } catch (error) {
+    const err = new Error("Error al Enviar Reseña");
+    res.status(500).json({ msg: err.message });
+  }
 };
 
-const readReviews = async () => {
-  return new Promise((resolve, reject) => {
-    const query = "SELECT * FROM reviews;";
-    db.execute(query, (error, results) => {
-      if (error) {
-        db.end((endError) => {
-          if (endError) {
-            return reject(endError);
-          }
-          return reject(error);
-        });
-      } else {
-        db.end((endError) => {
-          if (endError) {
-            return reject(endError);
-          }
-          resolve(results);
-        });
-      }
+const readReviews = async (req, res) => {
+  try {
+    const results = await Review.findAll();
+    res.status(200).json({
+      msg: "Reseñas Obtenidas con exito",
+      resultado: results,
     });
-  });
+  } catch (error) {
+    const err = new Error("Error al Buscar Reseñas");
+    res.status(500).json({ msg: err.message });
+  }
 };
 
 module.exports = { createReview, readReviews };

@@ -20,24 +20,8 @@ router.post("/sendEmail", (req, res) => {
   }
 });
 
-router.post("/sendReview", (req, res) => {
-  try {
-    createReview(req.body);
-    res.status(200).json({ msg: "Reseña Creada Correctamente" });
-  } catch (error) {
-    const err = new Error("Error al Enviar Reseña");
-    res.status(500).json({ msg: err.message });
-  }
-});
+router.post("/sendReview", createReview);
 
-router.get("/getReviews", async (req, res) => {
-  try {
-    const results = await readReviews();
-    res.status(200).json({ msg: "Reseñas Obtenidas con exito", results });
-  } catch (error) {
-    const err = new Error("Error al Buscar Reseñas");
-    res.status(500).json({ msg: err.message });
-  }
-});
+router.get("/getReviews", readReviews);
 
 module.exports = router;
