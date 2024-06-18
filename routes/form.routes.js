@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 const { enviarEmailNuevo } = require("../controllers/mailingController.js");
-const { createReview } = require("../controllers/tutorias.controller.js");
+const {
+  createReview,
+  readReviews,
+} = require("../controllers/tutorias.controller.js");
 
 router.post("/sendEmail", (req, res) => {
   try {
@@ -23,6 +26,16 @@ router.post("/sendReview", (req, res) => {
     res.status(200).json({ msg: "Reseña Creada Correctamente" });
   } catch (error) {
     const err = new Error("Error al Enviar Reseña");
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+router.get("/getReviews", async (req, res) => {
+  try {
+    const results = await readReviews();
+    res.status(200).json({ msg: "Reseñas Obtenidas con exito", results });
+  } catch (error) {
+    const err = new Error("Error al Buscar Reseñas");
     res.status(500).json({ msg: err.message });
   }
 });

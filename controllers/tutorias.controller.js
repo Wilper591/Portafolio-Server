@@ -12,4 +12,16 @@ const createReview = async (data) => {
   });
 };
 
-module.exports = { createReview };
+const readReviews = async () => {
+  return new Promise((resolve, reject) => {
+    const query = "SELECT * FROM reviews;";
+    db.execute(query, (error, results) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(results);
+    });
+  });
+};
+
+module.exports = { createReview, readReviews };
