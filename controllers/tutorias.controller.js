@@ -5,11 +5,21 @@ const createReview = async (data) => {
     const query = "INSERT INTO reviews (name, message) VALUES (?, ?);";
     db.execute(query, [data.nombre, data.mensaje], (error, results) => {
       if (error) {
-        return reject(error);
+        db.end((endError) => {
+          if (endError) {
+            return reject(endError);
+          }
+          return reject(error);
+        });
+      } else {
+        db.end((endError) => {
+          if (endError) {
+            return reject(endError);
+          }
+          resolve(results);
+        });
       }
-      resolve(results);
     });
-    db.end();
   });
 };
 
@@ -18,11 +28,21 @@ const readReviews = async () => {
     const query = "SELECT * FROM reviews;";
     db.execute(query, (error, results) => {
       if (error) {
-        return reject(error);
+        db.end((endError) => {
+          if (endError) {
+            return reject(endError);
+          }
+          return reject(error);
+        });
+      } else {
+        db.end((endError) => {
+          if (endError) {
+            return reject(endError);
+          }
+          resolve(results);
+        });
       }
-      resolve(results);
     });
-    db.end();
   });
 };
 
