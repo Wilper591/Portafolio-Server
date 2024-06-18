@@ -9,6 +9,7 @@ const createReview = async (data) => {
       }
       resolve(results);
     });
+    db.end();
   });
 };
 
@@ -21,6 +22,7 @@ const readReviews = async () => {
       }
       resolve(results);
     });
+    db.end();
   });
 };
 
