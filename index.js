@@ -1,9 +1,8 @@
-const dotenv = require("dotenv").config();
-const cors = require("cors");
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const dotenv = require("dotenv").config();
 const rutasForm = require("./routes/form.routes.js");
-
 const PORT = process.env.PORT || 3000;
 
 const dominiosPermitidos = [process.env.FRONTEND_URL];
