@@ -13,6 +13,7 @@ db.authenticate()
 const PORT = process.env.PORT || 3000;
 
 const dominiosPermitidos = [process.env.FRONTEND_URL];
+console.log(dominiosPermitidos);
 const corsOptions = {
   origin: function (origin, callback) {
     if (dominiosPermitidos.indexOf(origin) !== -1) {
