@@ -7,10 +7,6 @@ let transporter = nodemailer.createTransport({
   auth: {
     user: process.env.MI_MAIL,
     pass: process.env.MI_MAIL_PASSWORD,
-    type: process.env.TYPE_MAIL,
-    clientId: process.env.CLIENTE_ID,
-    clientSecret: process.env.CLIENTE_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN,
   },
 });
 
