@@ -1,0 +1,6 @@
+CREATE TABLE portafolio_db_thereairif.reviews (
+	id INT auto_increment NOT NULL,
+	name varchar(100) NOT NULL,
+	message varchar(100) NOT NULL,
+	CONSTRAINT reviews_pk PRIMARY KEY (id)
+)
